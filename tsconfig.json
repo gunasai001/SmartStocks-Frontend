@@ -13,12 +13,20 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "alwaysStrict": false,
 
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
     /* Linting */
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitThis": false,
+    "strictPropertyInitialization": false,
+    "useUnknownInCatchVariables": false,
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -11,7 +11,7 @@ const StockChart: React.FC<Props> = ({ data }) => {
   const fixedAxisRef = useRef<SVGSVGElement>(null);
 
   const chartData = useMemo(() => {
-    return data.map(point => ({
+    return data?.map(point => ({
       date: new Date(point.date),
       open: point.open,
       close: point.close,

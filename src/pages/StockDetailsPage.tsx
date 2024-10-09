@@ -4,7 +4,7 @@ import useStockData from '../hooks/useStockData';
 import StockDetails from '../components/stock/StockDetails';
 import Modal from '../components/stock/Modal';
 import { Stock } from '../types';
-import { buyStock, sellStock } from '../services/stockService';
+import { buyStock, sellStock, wishlistStock } from '../services/stockService';
 
 const StockDetailsPage: React.FC = () => {
   const { stockId } = useParams<{ stockId: string }>();
@@ -22,8 +22,9 @@ const StockDetailsPage: React.FC = () => {
     return <div className="text-center py-8 text-white">Stock not found.</div>;
   }
 
-  const handleAddToWishlist = (stock: Stock) => {
+  const handleAddToWishlist = async (stock: Stock) => {
     // Implement your wishlist logic here
+    await wishlistStock(stock.symbol,stock._id);
     console.log(`Added ${stock.symbol} to wishlist`);
   };
 
@@ -49,7 +50,6 @@ const StockDetailsPage: React.FC = () => {
         // Refresh the stock list to reflect the changes
         handleCloseModal();
       } catch (error) {
-        console.log("error here in stockdetails page")
         setError(`Sorry, ${error?.response.data.message}`);
       }
     }

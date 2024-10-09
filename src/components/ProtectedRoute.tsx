@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import { defaultUser } from '../defaultValues';
 import Loader from './common/Loader';
 
 const ProtectedRoute: React.FC = () => {
@@ -11,7 +10,7 @@ const ProtectedRoute: React.FC = () => {
     return <Loader />;
   }
 
-  if (user === defaultUser || user === null) {
+  if ( user === null) {
     return <Navigate to="/login" replace />;
   }
 

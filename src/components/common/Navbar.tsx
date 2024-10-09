@@ -1,17 +1,10 @@
-import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import { defaultUser } from '../../defaultValues';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user === defaultUser) {
-      navigate('/login');
-    }
-  }, [user, navigate]);
 
   const handleLogout = () => {
     logout();
@@ -25,11 +18,16 @@ const Navbar: React.FC = () => {
             Home
           </Link>
         </li>
-        {(user !== defaultUser && user !== null) && (
+        {(  user !== null) && (
           <>
             <li>
               <Link to="/stocks" className="hover:text-gray-400">
                 Stocks
+              </Link>
+            </li>
+            <li>
+              <Link to="/comparison" className="hover:text-gray-400">
+                Comparison
               </Link>
             </li>
             <li>
@@ -39,7 +37,7 @@ const Navbar: React.FC = () => {
             </li>
           </>
         )}
-        {(user !== defaultUser && user !== null) ? (
+        {( user !== null) ? (
           <li>
             <button
               onClick={handleLogout}

@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, stock, action, onSubmit,
         <h2 className="text-2xl font-bold mb-4 capitalize">{action} {stock.name}</h2>
         {error && <p className="text-red-500 mt-2">{error}</p>}
 
-        <p className="mb-4">Current Price: ${stock.price.toFixed(2)}</p>
+        <p className="mb-4">Current Price: ₹{stock.price.toFixed(2)}</p>
         {action == 'buy' && <div className="mb-4">
           <label htmlFor="quantity" className="block mb-2">Quantity:</label>
           <input
@@ -32,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, stock, action, onSubmit,
             className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-green-500"
           />
         </div>}
-        <p className="mb-4">Total: ${(stock.price * quantity).toFixed(2)}</p>
+        <p className="mb-4">Total: ₹{(stock.price * quantity).toFixed(2)}</p>
         <div className="flex justify-end space-x-4">
           <button
             onClick={() => onSubmit(quantity)}

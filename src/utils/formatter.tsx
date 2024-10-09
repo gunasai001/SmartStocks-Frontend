@@ -1,7 +1,7 @@
 // utils/formatter.js
 
 // Format large numbers with commas and abbreviate if necessary
-export const formatNumber = (num) => {
+export const formatNumber = (num: number) => {
   if (num === null || num === undefined) return 'N/A';
   
   if (Math.abs(num) >= 1.0e9) {
@@ -22,7 +22,7 @@ export const formatNumber = (num) => {
 };
 
 // Format date to a readable string
-export const formatDate = (date) => {
+export const formatDate = (date:Date) => {
   if (!(date instanceof Date)) {
     date = new Date(date);
   }
@@ -34,13 +34,13 @@ export const formatDate = (date) => {
 };
 
 // Format percentage
-export const formatPercentage = (num) => {
+export const formatPercentage = (num:number|null) => {
   if (num === null || num === undefined) return 'N/A';
   return (num * 100).toFixed(2) + '%';
 };
 
 // Format currency
-export const formatCurrency = (num, currency = 'USD') => {
+export const formatCurrency = (num:number|null, currency = 'USD') => {
   if (num === null || num === undefined) return 'N/A';
   return new Intl.NumberFormat('en-US', {
     style: 'currency',

@@ -6,6 +6,8 @@ export interface User {
   mobileno: string;
   selected_stocks: SelectedStock[];
   wishlisted_stocks: WishlistedStock[];
+  _v: number;
+  _id: string;
 }
 
 export interface SelectedStock {
@@ -15,7 +17,7 @@ export interface SelectedStock {
 }
 
 export interface WishlistedStock {
-  stock: Stock;
+  _id: string;
 }
 
 export interface Stock {
@@ -35,7 +37,7 @@ export interface Stock {
   price_to_sales_ratio: number;
   debt_to_equity_ratio: number;
   historical_prices?: HistoricalPrice[];
-  predictions?: Prediction[];
+  predictions?: number[];
 }
 
 export interface HistoricalPrice {
@@ -46,7 +48,3 @@ export interface HistoricalPrice {
   close: number;
 }
 
-export interface Prediction {
-  date: Date;
-  prediction: 'up' | 'down';
-}

@@ -13,11 +13,20 @@ export const fetchStockList = async (): Promise<Stock[]> => {
   }
 };
 
+export const wishlistStock = async (symbol: string, _id: string): Promise<void> => {
+  try {
+    await axiosInstance.post(`/portfolio/wishlist/:${symbol}`, {_id});
+  } catch (error) {
+    console.log('Error wishlisting stock');
+    // alert("Problem adding stock to wishlist")
+    throw error;
+  }
+};
 export const buyStock = async (symbol: string, _id: string, price: number, quantity: number): Promise<void> => {
   try {
     await axiosInstance.post(`/portfolio/add/:${symbol}`, {_id, price, quantity });
   } catch (error) {
-    console.log('Error buying stock:', error.response.data);
+    console.log('Error buying stock');
     throw error;
   }
 };

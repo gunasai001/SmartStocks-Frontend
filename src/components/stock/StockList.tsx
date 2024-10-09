@@ -6,7 +6,7 @@ import { buyStock, sellStock } from '../../services/stockService';
 
 interface StockListProps {
   stocks: Stock[];
-  onAddToWishlist: (stock: Stock) => void;
+  onAddToWishlist: (stock: Stock) => void ;
 }
 
 const StockList: React.FC<StockListProps> = ({ stocks, onAddToWishlist }) => {
@@ -38,7 +38,6 @@ const StockList: React.FC<StockListProps> = ({ stocks, onAddToWishlist }) => {
         }
         handleCloseModal();
       } catch (error) {
-        console.log("error here in stock list")
         setError(`Sorry, ${error?.response.data.message}`);
 
       }

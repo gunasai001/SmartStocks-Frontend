@@ -7,6 +7,7 @@ import Loader from './components/common/Loader';
 import ProtectedRoute from './components/ProtectedRoute';
 import useAuth from './hooks/useAuth';
 import { StockProvider } from './contexts/StockContext';
+import ComparisonPage from './pages/ComparisonPage';
 
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const Home = lazy(() => import('./pages/Home'));
@@ -40,6 +41,7 @@ const AppRoutes = () => {
         <Route path="/stocks" element={<StockListPage />} />
         <Route path="/stocks/:stockId" element={<StockDetailsPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/comparison" element={<ComparisonPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

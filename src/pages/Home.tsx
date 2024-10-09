@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import { defaultUser } from '../defaultValues';
 
 const Home: React.FC = () => {
   const { user } = useAuth();
@@ -12,7 +11,7 @@ const Home: React.FC = () => {
 
       <div className="text-center my-auto">
         <h1 className="text-6xl font-bold mb-4">Welcome to Smart Stocks</h1>
-        {user !== defaultUser && user !== null ? (
+        {user !== null ? (
           <p className="text-2xl mb-8">
             Hello, {user.username}! Start exploring our stock predictions.
           </p>

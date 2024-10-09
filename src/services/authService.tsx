@@ -14,8 +14,16 @@ interface RegistrationResponse {
   message?: string;
   error?: string;
 }
+interface RegisterProps{
+  username: string;
+  email: string;
+  password: string;
+  fullname: string;
+  mobileno: string;
+}
 
-export const registerUser = async (userData: User): Promise<RegistrationResponse> => {
+
+export const registerUser = async (userData: RegisterProps): Promise<RegistrationResponse> => {
   try {
     const response = await axios.post<RegistrationResponse>(`${API_BASE_URL}/register`, userData);
     return { success: true, message: response.data.message };
@@ -27,9 +35,9 @@ export const registerUser = async (userData: User): Promise<RegistrationResponse
   }
 };
 // Function to login a user
-interface LoginError {
-  error: string;
-}
+// interface LoginError {
+//   error: string;
+// }
 
 export const loginUser = async (credentials: { email: string; password: string }): Promise<number | AuthResponse> => {
   try {
@@ -53,7 +61,7 @@ export const loginUser = async (credentials: { email: string; password: string }
 export const getCurrentUser = async (): Promise<User> => {
   try {
     const response = await axiosInstance.get<User>('/portfolio/me');
-    return response.data.user;
+    return response.data;
   } catch (error) {
     console.error('Error fetching current user:', error);
     throw error;

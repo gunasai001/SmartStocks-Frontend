@@ -48,8 +48,11 @@ const DashboardPage: React.FC = () => {
                 <tr className="border-b border-gray-700">
                   <th className="py-2">Stock Name</th>
                   <th className="py-2">Symbol</th>
-                  <th className="py-2">Price</th>
+                  <th className="py-2">Purchased Price</th>
+                  <th className="py-2">Current Price</th>
+                  <th className='py-2'>Gain/Loss</th>
                   <th className="py-2">Quantity</th>
+                  <th className="py-2">Total Gain/Loss</th>
                   <th className="py-2">Total Value</th>
                 </tr>
               </thead>
@@ -57,21 +60,31 @@ const DashboardPage: React.FC = () => {
                 {user?.selected_stocks.map((selectedStock: SelectedStock, index: number) => {
                   const stock = stocks.find(s => s._id.toString() === selectedStock._id);
 
-                  const name = stock ? stock.name : null;
-                  const symbol = stock ? stock.symbol : null;
+                  const name = stock?.name;
+                  const symbol = stock?.symbol;
+                  const price = stock?.price;
                   return (
-                  <tr key={index} className="border-b border-gray-700">
-                    <td className="py-2">{name || 'N/A'}</td>
-                    <td className="py-2">{symbol || 'N/A'}</td>
-                    <td className="py-2">${selectedStock.price.toFixed(2) || 'N/A'}</td>
-                    <td className="py-2">{selectedStock.quantity || 'N/A'}</td>
-                    <td className="py-2">
-                      ${(selectedStock.price && selectedStock.quantity) 
-                        ? (selectedStock.price * selectedStock.quantity).toFixed(2) 
-                        : 'N/A'}
-                    </td>
-                  </tr>
-                )})}
+                    <tr key={index} className="border-b border-gray-700">
+                      <td className="py-2">{name || 'N/A'}</td>
+                      <td className="py-2">{symbol || 'N/A'}</td>
+                      <td className="py-2">₹{selectedStock.price.toFixed(2) || 'N/A'}</td>
+                      <td className="py-2">₹{price?.toFixed(2) || 'N/A'}</td>
+                      <td className={`py-2 ${price && selectedStock.price ? (price - selectedStock.price >= 0 ? 'text-green-400' : 'text-red-400') : 'text-red-400'}`}>
+                        ₹{(price && selectedStock.price) ? (price - selectedStock.price).toFixed(2) : 'N/A'}
+                      </td>
+                      <td className="py-2">{selectedStock.quantity || 'N/A'}</td>
+                      <td className={`py-2 ${price && selectedStock.price ? ((price - selectedStock.price) >= 0 ? 'text-green-400' : 'text-red-400') : 'text-red-400'}`}>
+                        ₹{(price && selectedStock.price) ? ((price - selectedStock.price) * selectedStock.quantity).toFixed(2) : 'N/A'}
+                      </td>
+
+                      <td className="py-2">
+                        ₹{(selectedStock.price && selectedStock.quantity)
+                          ? (selectedStock.price * selectedStock.quantity).toFixed(2)
+                          : 'N/A'}
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           ) : (
@@ -82,13 +95,31 @@ const DashboardPage: React.FC = () => {
         <div className="mb-10">
           <h3 className="text-lg font-bold mb-4 text-green-400">Your Wishlisted Stocks</h3>
           {user.wishlisted_stocks?.length > 0 ? (
-            <ul className="list-disc pl-4 text-gray-300">
-              {user.wishlisted_stocks.map((stock: WishlistedStock, index: number) => (
-                <li key={index} className="mb-2">
-                  {stock.stock?.name || 'N/A'} ({stock.stock?.symbol || 'N/A'}) - Current Price: ${stock.stock?.price?.toFixed(2) || 'N/A'}
-                </li>
-              ))}
-            </ul>
+            <table className="w-full text-left text-gray-300">
+              <thead>
+                <tr className="border-b border-gray-700">
+                  <th className="py-2">Stock Name</th>
+                  <th className="py-2">Symbol</th>
+                  <th className="py-2">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {user?.wishlisted_stocks.map((selectedStock: WishlistedStock, index: number) => {
+                  const stock = stocks.find(s => s._id.toString() === selectedStock._id);
+
+                  const name = stock ? stock.name : null;
+                  const symbol = stock ? stock.symbol : null;
+                  const price = stock ? stock.price : null;
+                  return (
+                    <tr key={index} className="border-b border-gray-700">
+                      <td className="py-2">{name || 'N/A'}</td>
+                      <td className="py-2">{symbol || 'N/A'}</td>
+                      <td className="py-2">₹{price?.toFixed(2) || 'N/A'}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
           ) : (
             <p className="text-gray-400">You haven't wishlisted any stocks yet.</p>
           )}

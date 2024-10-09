@@ -22,7 +22,7 @@ const StockCard: React.FC<StockCardProps> = ({ stock, onAddToWishlist, onActionC
             <h3 className="text-xl font-bold text-green-400">{stock.name}</h3>
             <p className="text-gray-400">{stock.symbol}</p>
           </div>
-          <p className="text-white font-semibold text-lg">${stock.price.toFixed(2)}</p>
+          <p className="text-white font-semibold text-lg">₹{stock.price.toFixed(2)}</p>
         </div>
         <p className="text-gray-300">{stock.sector}</p>
       </Link>

@@ -2,19 +2,21 @@ import React from 'react';
 import useAuth from '../hooks/useAuth';
 import useStockData from '../hooks/useStockData';
 import StockList from '../components/stock/StockList';
-import { defaultUser } from '../defaultValues';
 import { Stock } from '../types';
+import { wishlistStock } from '../services/stockService';
 
 const StockListPage: React.FC = () => {
   const { user } = useAuth();
   const { stocks } = useStockData();
 
-  const handleAddToWishlist = (stock: Stock) => {
+  const handleAddToWishlist = async (stock: Stock) => {
     // Implement your wishlist logic here
+    await wishlistStock(stock.symbol,stock._id);
+
     console.log(`Added ${stock.symbol} to wishlist`);
   };
 
-  if (user === defaultUser || user === null) {
+  if (user === null) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <p className="text-gray-600">Please log in to view the stock list.</p>

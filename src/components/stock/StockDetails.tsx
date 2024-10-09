@@ -4,6 +4,7 @@ import { Stock } from '../../types';
 import StockChart from './StockChart';
 import StockActions from './StockActions';
 import WishlistButton from './WishlistButton';
+import PredictedChart from './PredictedChart';
 
 
 interface StockDetailsProps {
@@ -77,6 +78,10 @@ const StockDetails: React.FC<StockDetailsProps> = ({ stock, onAddToWishlist, onA
         <h2 className="text-2xl font-bold mb-4 text-green-400">Historical Data</h2>
         <div className="rounded-lg w-full py-6 flex justify-center shadow-md bg-gray-800">
           <StockChart data={stock.historical_prices} />
+        </div>
+        <h2 className="text-2xl font-bold mb-4 text-green-400 mt-10">Predicted Prices for the Next Week</h2>
+        <div className='rounded-lg w-full py-6 flex justify-center shadow-md bg-gray-800'>
+          <PredictedChart data = {stock.predictions} price = {stock.price} />
         </div>
       </div>
     </div>
